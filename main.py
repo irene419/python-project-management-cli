@@ -3,6 +3,10 @@ from models.user import User
 from models.project import Project
 from models.task import Task
 from utils.storage import save_data, load_data
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
 
 
 def add_user(args):
@@ -38,7 +42,7 @@ def add_project(args):
 
 
 def list_projects(args):
-    """Lists all projects (and their tasks) for a given user."""
+    """Lists all projects (and their tasks) for a given user using a rich table."""
     user = User.find_by_name(args.user)
     if user is None:
         print(f"User '{args.user}' not found.")
@@ -48,11 +52,16 @@ def list_projects(args):
         print(f"{user.name} has no projects.")
         return
 
-    print(f"{user.name}'s Projects:")
     for project in user.projects:
-        print(f"  - {project.title} (due {project.due_date}) - {len(project.tasks)} task(s)")
+        table = Table(title=f"{project.title} (due {project.due_date}) - {user.name}")
+        table.add_column("Task", style="cyan")
+        table.add_column("Status", style="magenta")
+        table.add_column("Assigned To", style="green")
+
         for task in project.tasks:
-            print(f"      [{task.status}] {task.title} (assigned to {task.assigned_to})")
+            table.add_row(task.title, task.status, task.assigned_to)
+
+        console.print(table)
 
 
 def add_task(args):
