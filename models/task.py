@@ -43,5 +43,14 @@ class Task:
                     return task
         return None
 
+    def to_dict(self):
+        """Converts this Task into a dictionary for JSON storage."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "status": self.status,
+            "assigned_to": self.assigned_to
+        }
+
     def __repr__(self):
         return f"Task(id={self.id}, title='{self.title}', status='{self.status}', assigned_to='{self.assigned_to}')"

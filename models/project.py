@@ -42,5 +42,15 @@ class Project:
                 return project
         return None
 
+    def to_dict(self):
+        """Converts this Project (and its tasks) into a dictionary for JSON storage."""
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "due_date": self.due_date,
+            "tasks": [task.to_dict() for task in self.tasks]
+        }
+
     def __repr__(self):
         return f"Project(id={self.id}, title='{self.title}', tasks={len(self.tasks)})"
