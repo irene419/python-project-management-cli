@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "name": "Alex",
+      "email": "alex@email.com",
+      "projects": [
+        {
+          "id": 1,
+          "title": "CLI Tool",
+          "description": "Build a command-line app",
+          "due_date": "2026-07-01",
+          "tasks": [
+            {
+              "id": 1,
+              "title": "Write README",
+              "status": "pending",
+              "assigned_to": "Alex"
+            },
+            {
+              "id": 2,
+              "title": "Implement add-task",
+              "status": "in-progress",
+              "assigned_to": "Alex"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
